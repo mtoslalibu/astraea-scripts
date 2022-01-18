@@ -1,0 +1,6 @@
+ts-travel-service:getRouteByTripId2
+ts-train-service:retrieve2
+ts-ticketinfo-service:queryForTravel2
+ts-ticketinfo-service:POST2:http://ts-basic-service:15680/api/v1/basicservice/basic/travel
+ts-order-service:calculateSoldTicket:1
+ts-travel-service:GET2:http://ts-order-service:12031/api/v1/orderservice/order
