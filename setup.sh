@@ -60,6 +60,7 @@ sudo mvn clean package -Dmaven.test.skip=true
 #sudo docker-compose build
 #sudo docker-compose up
 cd ..
+cp astraea-scripts/example-span-states astraea-spans
 
 echo "Everything is installed and built now. go ahead and create external fs (mydata)"
 echo "After that please go back to train ticket - and docker-compose build then docker-compose up"
