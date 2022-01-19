@@ -19,44 +19,54 @@ git clone https://github.com/mtoslalibu/jaeger-client-java.git
 ##git checkout -b v0.30.6-astraea
 ## ext.developmentVersion = getProperty('developmentVersion','0.30.6')
 ## add -SNAPSHOT
+cd jaeger-client-java
 git checkout --track origin/v0.30.6-astraea
 git submodule init
 git submodule update
 sudo ./gradlew clean install
+cd ..
 
 
 ## servlet mert’s version
 git clone https://github.com/mtoslalibu/java-web-servlet-filter.git
+cd java-web-servlet-filter
 git checkout --track origin/v0.1.1-astraea
 sudo ./mvnw clean install -Dlicense.skip=true -Dcheckstyle.skip -DskipTests=true
-
+cd ..
 
 ## java spring web mert’s version
 git clone https://github.com/mtoslalibu/java-spring-web.git
+cd java-spring-web
 git checkout --track origin/v-0.3.4-astraea
 sudo ./mvnw clean install -Dlicense.skip=true -Dcheckstyle.skip -DskipTests=true
-
+cd ..
 
 ## git clone fork repo of java spring jaeger
 git clone https://github.com/mtoslalibu/java-spring-jaeger.git
+cd java-spring-jaeger
 ##git checkout tags/release-0.2.2 ## (change client java version to SNAPSHOT)
 git checkout --track origin/v0.2.2-astraea
 sudo ./mvnw clean install -Dlicense.skip=true -Dcheckstyle.skip -DskipTests=true
-
+cd ..
 
 
 ## go trainticket + switch to jaeger branch + then change java-jaeger-spring version to snapshot
 ##git checkout jaeger
-git clone https://github.com/FudanSELab/train-ticket.git
-git checkout --track origin/jaeger
+git clone https://github.com/mtoslalibu/train-ticket.git
+cd train-ticket
+git checkout --track origin/astraea
 ## change version under ts-common to snapshot
 sudo mvn clean package -Dmaven.test.skip=true
-sudo docker-compose build
-sudo docker-compose up
+#sudo docker-compose build
+#sudo docker-compose up
+cd ..
 
+echo "Everything is installed and built now. go ahead and create external fs (mydata)"
+echo "After that please go back to train ticket - and docker-compose build then docker-compose up"
 
+## -------------------
 
-ssh -p 22 toslali@amd133.utah.cloudlab.us -Y -L 16686:localhost:16686
+#ssh -p 22 toslali@amd133.utah.cloudlab.us -Y -L 16686:localhost:16686
 
 1.	Create external fs mydata (from cloudlab)
 a.	sudo /usr/local/etc/emulab/mkextrafs.pl /mydata
@@ -65,7 +75,7 @@ c.	then follow the steps in the link below
 
 2.	https://linuxconfig.org/how-to-move-docker-s-default-var-lib-docker-to-another-directory-on-ubuntu-debian-linux
 
-exact steps for mounting disk:
+#exact steps for mounting disk:
 sudo mkdir /mydata
 sudo /usr/local/etc/emulab/mkextrafs.pl /mydata
 sudo chmod ugo+rwx /mydata
@@ -80,7 +90,7 @@ ps aux | grep -i docker | grep -v grep
 
 
 
-
+#### other quick helper scripts below -- so ignore for set up
 sudo docker ps -q | xargs -r sudo docker kill
 
 sudo docker system prune --all --force –volumes
