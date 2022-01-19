@@ -59,12 +59,14 @@ git checkout --track origin/astraea
 sudo mvn clean package -Dmaven.test.skip=true
 #sudo docker-compose build
 #sudo docker-compose up
+## create span states file to populate in memory astraea data structure
 cd ..
 cp astraea-scripts/example-span-states astraea-spans
+sudo chmod ugo+rwx astraea-spans
 
 echo "Everything is installed and built now. go ahead and create external fs (mydata)"
 echo "After that please go back to train ticket - and docker-compose build then docker-compose up"
-
+exit 1
 ## -------------------
 
 #ssh -p 22 toslali@amd133.utah.cloudlab.us -Y -L 16686:localhost:16686
