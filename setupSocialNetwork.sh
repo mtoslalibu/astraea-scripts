@@ -25,13 +25,13 @@ pip3 install aiohttp
 cd /local
 git clone https://github.com/mtoslalibu/DeathStarBench.git
 cd DeathStarBench/socialNetwork
-sudo docker-compose up -d
-sudo python3 scripts/init_social_graph.py --graph=socfb-Reed98
+#sudo docker-compose up -d
+#sudo python3 scripts/init_social_graph.py --graph=socfb-Reed98
 
 ## start workload
 cd wrk2
 make
-./wrk -D exp -t 20 -c 20 -d 200 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 20
+#./wrk -D exp -t 20 -c 20 -d 200 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 20
 
 
 
