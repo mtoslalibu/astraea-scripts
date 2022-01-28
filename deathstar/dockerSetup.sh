@@ -1,25 +1,19 @@
 #!/bin/bash
 
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+##Deathstarbench scripts:
+
+##ssh -p 22 toslali@amd133.utah.cloudlab.us -Y -L 16686:localhost:16686
+
+sudo apt update
+sudo apt --yes install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 apt-cache policy docker-ce
-sudo apt install -y docker-ce
-sudo systemctl status docker --no-pager
-
-for user in $(ls /users)
-do
-	sudo usermod -aG docker $user
-done
-
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo apt --yes install docker-ce
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-sudo docker-compose --version
-sudo echo -e '\n\nexport PATH=$PATH:/usr/local/bin' >> .bashrc
-source .bashrc
+sudo docker-compose –version
 
-docker
-docker-compose
 
 ## stop docker to update work dir
 sudo systemctl stop docker.service
@@ -29,8 +23,6 @@ sudo systemctl stop docker.socket
 sudo mkdir /mydata
 sudo /usr/local/etc/emulab/mkextrafs.pl /mydata
 sudo chmod ugo+rwx /mydata
-sudo systemctl stop docker.service
-sudo systemctl stop docker.socket
 
 SEARCH_STRING="ExecStart=/usr/bin/dockerd -H fd://"
 REPLACE_STRING="ExecStart=/usr/bin/dockerd -g /mydata -H fd://"
@@ -42,7 +34,3 @@ sudo systemctl start docker
 ps aux | grep -i docker | grep -v grep
 echo "Check above for directory on where docker works"
 
-#sudo mkdir -p /mydata/docker
-#sudo rsync -aqxP /var/lib/docker/ /mydata/docker
-#sudo systemctl daemon-reload
-#sudo systemctl start docker
