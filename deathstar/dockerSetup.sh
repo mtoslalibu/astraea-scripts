@@ -21,6 +21,14 @@ source .bashrc
 docker
 docker-compose
 
+## stop docker to update work dir
+sudo systemctl stop docker.service
+sudo systemctl stop docker.socket
+
+## create extrafs
+sudo mkdir /mydata
+sudo /usr/local/etc/emulab/mkextrafs.pl /mydata
+sudo chmod ugo+rwx /mydata
 sudo systemctl stop docker.service
 sudo systemctl stop docker.socket
 
@@ -28,8 +36,13 @@ SEARCH_STRING="ExecStart=/usr/bin/dockerd -H fd://"
 REPLACE_STRING="ExecStart=/usr/bin/dockerd -g /mydata/docker -H fd://"
 sudo sed -i "s#$SEARCH_STRING#$REPLACE_STRING#" /lib/systemd/system/docker.service
 
-sudo mkdir -p /mydata/docker
-sudo rsync -aqxP /var/lib/docker/ /mydata/docker
-
+sudo rsync -aqxP /var/lib/docker/ /mydata
 sudo systemctl daemon-reload
 sudo systemctl start docker
+ps aux | grep -i docker | grep -v grep
+echo "Check above for directory on where docker works"
+
+#sudo mkdir -p /mydata/docker
+#sudo rsync -aqxP /var/lib/docker/ /mydata/docker
+#sudo systemctl daemon-reload
+#sudo systemctl start docker
