@@ -2,13 +2,22 @@
 cd /local
 git clone https://github.com/mtoslalibu/DeathStarBench.git
 cd DeathStarBench/socialNetwork
-#sudo docker-compose up -d
-## build your own version
-#sudo docker build -t yg397/social-network-microservices:latest .
 
+## build your own version
+cd /local/DeathStarBench/socialNetwork/docker/thrift-microservice-deps/cpp
+sudo docker build -t mert/thrift-microservice-deps:xenial .
+cd /local/DeathStarBench/socialNetwork
+sudo docker build -t mert/social-network-microservices:latest .
+
+## boot them
+sudo docker-compose up -d
+
+## populate data
 #sudo python3 scripts/init_social_graph.py --graph=socfb-Reed98
 
-## start workload
+## build workload
 cd wrk2
 make
 cd ..
+
+#sudo docker build -t yg397/social-network-microservices:latest .
