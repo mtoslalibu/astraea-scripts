@@ -19,7 +19,7 @@ echo -e "\n\nIteration $x"
 
 # echo "Time now before injection $(date +%s)"
 
-./hey_linux_amd64 -z 5s -c 6 -q 6 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyy
+./hey_linux_amd64 -z 30s -c 6 -q 6 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyy
 
 limit=`tail -n 4 /tmp/heyy | head -1 | awk '{print $2}'`
 # echo "limit now $limit"
