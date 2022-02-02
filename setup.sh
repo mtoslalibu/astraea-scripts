@@ -91,7 +91,7 @@ sudo mvn clean package -Dmaven.test.skip=true
 cd ..
 mkdir -p /local/astraea-spans
 sudo chmod ugo+rwx /local/astraea-spans
-cp /local/astraea-scripts/example-span-states /local/astraea-spans/states
+cp /local/astraea-scripts/astraea-span-allenabled /local/astraea-spans/states
 
 
 #echo "Everything is installed and built now. go ahead and create external fs (mydata)"
