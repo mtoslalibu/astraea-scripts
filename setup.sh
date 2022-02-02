@@ -90,8 +90,8 @@ sudo mvn clean package -Dmaven.test.skip=true
 ## create span states file to populate in memory astraea data structure
 cd ..
 mkdir -p /local/astraea-spans
-sudo chmod ugo+rwx /local/astraea-spans/astraea-spans
-cp astraea-scripts/example-span-states /local/astraea-spans/states
+sudo chmod ugo+rwx /local/astraea-spans
+cp /local/astraea-scripts/example-span-states /local/astraea-spans/states
 
 
 #echo "Everything is installed and built now. go ahead and create external fs (mydata)"
