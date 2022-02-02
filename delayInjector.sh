@@ -117,7 +117,7 @@ echo "saved traces to  $filename"
 # sed -i 's/inject-//' /local/astraea-spans/states
 # ## append 1 back
 # sed -i "${randomNumber} s/./1&/" /local/astraea-spans/states
-cat /local/astraea-span-allenabled > /local/astraea-spans/states
+cat /local/astraea-scripts/astraea-span-allenabled > /local/astraea-spans/states
 
 
 # do docker stats --no-stream train-ticket_${1}_1 | tail -1 >> ${2}.txt; 
