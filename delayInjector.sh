@@ -4,13 +4,13 @@ reset=`tput sgr0`
 
 ## example usage: ./docker-stats.sh ts-travel-service nosampledstats-fixed
 echo "warming up the containers"
-# ./hey_linux_amd64 -z 20s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left
+./hey_linux_amd64 -z 20s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left
 echo "warming done"
 
 # mkdir -p synexperiment/
 
 x=0
-while [ $x -le 3 ]
+while [ $x -le 5 ]
 do
 
 x=$(( $x + 1 ))
@@ -19,7 +19,7 @@ echo -e "\n\nIteration $x"
 
 # echo "Time now before injection $(date +%s)"
 
-./hey_linux_amd64 -z 5s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyy
+./hey_linux_amd64 -z 5s -c 6 -q 6 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyy
 
 limit=`tail -n 4 /tmp/heyy | head -1 | awk '{print $2}'`
 # echo "limit now $limit"
@@ -72,7 +72,7 @@ echo "Time now while injection $(date +%s)"
 # date +%s
 
 ## run workload 
-./hey_linux_amd64 -z 10s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyyinjected &
+./hey_linux_amd64 -z 10s -c 6 -q 6 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyyinjected &
 workloadPID=$!
 
 
