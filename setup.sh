@@ -18,6 +18,13 @@ sudo docker-compose --version
 sudo systemctl stop docker.service
 sudo systemctl stop docker.socket
 
+
+## bash users
+for user in $(ls /users)
+do
+	sudo chsh $user --shell /bin/bash
+done
+
 ## create extrafs
 sudo mkdir /mydata
 sudo /usr/local/etc/emulab/mkextrafs.pl /mydata
@@ -32,7 +39,9 @@ ps aux | grep -i docker | grep -v grep
 echo "Check above for directory on where docker works"
 
 
+
 ## fork repo of java client
+cd /local
 git clone https://github.com/mtoslalibu/jaeger-client-java.git    
 ##git checkout tags/v0.30.6
 ##git checkout -b v0.30.6-astraea
