@@ -13,6 +13,25 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 sudo docker-compose --version
 
+### create extrafs
+## stop docker to update work dir
+sudo systemctl stop docker.service
+sudo systemctl stop docker.socket
+
+## create extrafs
+sudo mkdir /mydata
+sudo /usr/local/etc/emulab/mkextrafs.pl /mydata
+sudo chmod ugo+rwx /mydata
+SEARCH_STRING="ExecStart=/usr/bin/dockerd -H fd://"
+REPLACE_STRING="ExecStart=/usr/bin/dockerd -g /mydata -H fd://"
+sudo sed -i "s#$SEARCH_STRING#$REPLACE_STRING#" /lib/systemd/system/docker.service
+sudo rsync -aqxP /var/lib/docker/ /mydata
+sudo systemctl daemon-reload
+sudo systemctl start docker
+ps aux | grep -i docker | grep -v grep
+echo "Check above for directory on where docker works"
+
+
 ## fork repo of java client
 git clone https://github.com/mtoslalibu/jaeger-client-java.git    
 ##git checkout tags/v0.30.6
@@ -61,10 +80,12 @@ sudo mvn clean package -Dmaven.test.skip=true
 #sudo docker-compose up
 ## create span states file to populate in memory astraea data structure
 cd ..
-cp astraea-scripts/example-span-states astraea-spans
-sudo chmod ugo+rwx astraea-spans
+mkdir -p /local/astraea-spans
+sudo chmod ugo+rwx /local/astraea-spans/astraea-spans
+cp astraea-scripts/example-span-states /local/astraea-spans/states
 
-echo "Everything is installed and built now. go ahead and create external fs (mydata)"
+
+#echo "Everything is installed and built now. go ahead and create external fs (mydata)"
 echo "After that please go back to train ticket - and docker-compose build then docker-compose up"
 exit 1
 ## -------------------
