@@ -1,0 +1,6 @@
+## scaling docker container
+sudo docker-compose up -d --scale compose-post-service=3
+
+## hostname
+We need to remove hardcoded hostname, otherwise not unique!
+
