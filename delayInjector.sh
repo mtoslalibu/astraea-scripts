@@ -4,7 +4,7 @@ reset=`tput sgr0`
 
 ## example usage: ./docker-stats.sh ts-travel-service nosampledstats-fixed
 echo "warming up the containers"
-./hey_linux_amd64 -z 120s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left
+./hey_linux_amd64 -z 200s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left
 echo "warming done"
 
 filename_out="/mydata/traces/synexperiment1"
@@ -22,10 +22,10 @@ echo -e "\n\nIteration $x"
 
 # echo "Time now before injection $(date +%s)"
 
-./hey_linux_amd64 -z 30s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyy
+./hey_linux_amd64 -z 90s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyy
 
 limit=`tail -n 4 /tmp/heyy | head -1 | awk '{print $2}'`
-cat /tmp/heyy | head -5 | tail -1
+cat /tmp/heyy | head -6 | tail -1
 # echo "limit now $limit"
 ## get traces
 sleep 1
@@ -76,12 +76,12 @@ echo "Time now while injection $(date +%s)"
 # date +%s
 
 ## run workload 
-./hey_linux_amd64 -z 30s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyyinjected &
+./hey_linux_amd64 -z 90s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyyinjected &
 workloadPID=$!
 
 
 ## check if container has sleeped
-sleep 6;
+sleep 15;
 
 sudo docker ps | grep $svc | awk '{print $1}' | xargs sudo docker logs --tail 100 > /tmp/temper
 # if [[sleepFound]];
@@ -99,7 +99,7 @@ echo -e "\nTime now after injection $(date +%s)"
 
 limit=`tail -n 4 /tmp/heyyinjected | head -1 | awk '{print $2}'`
 
-cat /tmp/heyyinjected | head -5 | tail -1
+cat /tmp/heyyinjected | head -6 | tail -1
 # echo "limit after injection now $limit"
 ## save traces again
 endtime=`date +%s`
@@ -128,7 +128,7 @@ cat /local/astraea-scripts/astraea-span-allenabled > /local/astraea-spans/states
 
 
 # do docker stats --no-stream train-ticket_${1}_1 | tail -1 >> ${2}.txt; 
-sleep 10; 
+sleep 30; 
 
 echo "check line number afterwards should be empty"
 cat /local/astraea-spans/states | grep 'inject'
