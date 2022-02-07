@@ -13,6 +13,8 @@ mkdir -p $filename_out
 iter=5
 
 entries=($(shuf -i 2-30 -n $iter))
+echo "${entries[@]}"
+
 x=0
 while [ $x -le $iter ]
 do
