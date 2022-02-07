@@ -25,6 +25,7 @@ echo -e "\n\nIteration $x"
 ./hey_linux_amd64 -z 30s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left > /tmp/heyy
 
 limit=`tail -n 4 /tmp/heyy | head -1 | awk '{print $2}'`
+cat /tmp/heyy | head -5 | tail -1
 # echo "limit now $limit"
 ## get traces
 sleep 1
@@ -97,6 +98,8 @@ echo -e "\nTime now after injection $(date +%s)"
 # date +%s
 
 limit=`tail -n 4 /tmp/heyyinjected | head -1 | awk '{print $2}'`
+
+cat /tmp/heyyinjected | head -5 | tail -1
 # echo "limit after injection now $limit"
 ## save traces again
 endtime=`date +%s`
