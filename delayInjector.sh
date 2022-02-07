@@ -11,7 +11,7 @@ echo "warming done"
 filename_out="/mydata/traces/synexperiment3"
 mkdir -p $filename_out
 
-iter=5
+iter=25
 
 entries=($(shuf -i 2-30 -n $iter))
 echo "${entries[@]}"
