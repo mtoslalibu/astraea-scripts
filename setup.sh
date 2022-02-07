@@ -41,6 +41,8 @@ ps aux | grep -i docker | grep -v grep
 echo "Check above for directory on where docker works"
 
 
+cd /local
+git clone https://github.com/mtoslalibu/astraea-scripts.git
 
 ## fork repo of java client
 cd /local
@@ -98,6 +100,10 @@ cp /local/astraea-scripts/astraea-span-allenabled /local/astraea-spans/states
 
 #echo "Everything is installed and built now. go ahead and create external fs (mydata)"
 echo "After that please go back to train ticket - and docker-compose build then docker-compose up"
+
+## send email
+mail -s "TrainTicket instance finished setting up!" $(geni-get slice_email)
+
 exit 1
 ## -------------------
 
