@@ -48,10 +48,10 @@ echo "Line number now $randomNumber"
 ## remove 1
 sed -i "${randomNumber} s/1//" /local/astraea-spans/states
 sed -i "${randomNumber} s/./inject-&/" /local/astraea-spans/states
-sleep 6
+sleep 11
 
-# echo "check line number"
-# cat /local/astraea-spans/states | grep 'inject'
+#echo "check line number"
+#cat /local/astraea-spans/states | grep 'inject'
 ## get line to var e.g., inject-ts-order-service:calculateSoldTicket
 svc_line=$(cat /local/astraea-spans/states | grep 'inject')
 # echo "svcline $svc_line"
