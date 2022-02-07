@@ -7,7 +7,7 @@ echo "warming up the containers"
 ./hey_linux_amd64 -z 200s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left
 echo "warming done"
 
-filename_out="/mydata/traces/synexperiment1"
+filename_out="/mydata/traces/synexperiment3"
 mkdir -p $filename_out
 
 iter=5
