@@ -10,10 +10,11 @@ echo "warming done"
 filename_out="/mydata/traces/synexperiment1"
 mkdir -p $filename_out
 
+iter=5
 
-
+entries=($(shuf -i 2-30 -n $iter))
 x=0
-while [ $x -le 5 ]
+while [ $x -le $iter ]
 do
 
 x=$(( $x + 1 ))
@@ -39,8 +40,9 @@ echo "url now $url"
 ## randomly generate number
 randomNumber=$((1 + $RANDOM % 30))
 # randomNumber=1
+randomNumber=${entries[$x]}
 if [[ "$randomNumber" -eq 5 ]]; then
-randomNumber=6 
+randomNumber=1 
 echo "queryinfo should not be there" 
 fi
 
