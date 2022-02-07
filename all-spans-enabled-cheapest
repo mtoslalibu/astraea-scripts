@@ -26,7 +26,7 @@ ts-travel-service:POST:http://ts-ticketinfo-service:15681/api/v1/ticketinfoservi
 1ts-order-service:getTicketListByDateAndTripId
 1ts-basic-service:GET:http://ts-price-service:16579/api/v1/priceservice/prices
 1ts-travel-service:GET:http://ts-order-service:12031/api/v1/orderservice/order
-1ts-travel-plan-service:getByCheapest
+1ts-travel-plan-service:getByCheapest1
 1ts-order-other-service:calculateSoldTicket
 1ts-travel-plan-service:GET:http://ts-ticketinfo-service:15681/api/v1/ticketinfoservice/ticketinfo
 1ts-seat-service:GET:http://ts-config-service:15679/api/v1/configservice/configs
