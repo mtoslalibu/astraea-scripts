@@ -1,9 +1,10 @@
 red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`
-
+sleep 200
 ## example usage: ./docker-stats.sh ts-travel-service nosampledstats-fixed
 echo "warming up the containers"
+
 ./hey_linux_amd64 -z 200s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left
 echo "warming done"
 
