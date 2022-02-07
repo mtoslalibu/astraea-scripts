@@ -7,7 +7,10 @@ echo "warming up the containers"
 ./hey_linux_amd64 -z 20s -c 5 -q 5 -m POST -H "Content-Type: application/json" -d '{"startingPlace": "Shang Hai", "endPlace": "Su Zhou"}' http://localhost:8080/api/v1/travelservice/trips/left
 echo "warming done"
 
-mkdir -p synexperiment/
+filename_out="/mydata/traces/synexperiment1"
+mkdir -p $filename_out
+
+
 
 x=0
 while [ $x -le 5 ]
@@ -56,7 +59,7 @@ echo "curling now to $svc_line  with url $url"
 
 filename="$svc_line-$endtime"
 filename=${filename//\//___}
-filename="synexperiment/$filename"
+filename="$filename_out/$filename"
 # echo "filename now : $filename"
 curl -sS "$url" > $filename
 echo "saved traces to  $filename"
@@ -106,7 +109,8 @@ sleep 5;
 echo "curling now to $svc_line with url $url"
 filename="$svc_line-$endtime"
 filename=${filename//\//___}
-filename="synexperiment/$filename-injected"
+#filename="synexperiment/$filename-injected"
+filename="$filename_out/$filename-injected"
 # echo "filename now : $filename"
 # filename="synexperiment/$svc_line-$endtime-injected"
 curl -sS "$url" > $filename
