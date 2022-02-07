@@ -25,5 +25,7 @@ node.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD
 ##node.addService(pg.Execute(shell="bash", command="/local/repository/changeShells.sh"))
 node.addService(pg.Execute(shell="bash", command="/local/repository/setup.sh"))
 
+node.addService(pg.Execute(shell="bash", command="/local/repository/email.sh"))
+
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
