@@ -1,6 +1,8 @@
 ## execute this script with bash (i.e., /bin/bash setup.sh)
 
 ## install jdk and maven
+echo "Basladi"
+
 sudo apt update
 sudo apt-get --yes install openjdk-8-jdk
 sudo apt --yes install maven
@@ -15,10 +17,13 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 sudo docker-compose --version
 
+echo "Docker done"
+
 ### create extrafs
 ## stop docker to update work dir
 sudo systemctl stop docker.service
 sudo systemctl stop docker.socket
+
 
 
 ## bash users
