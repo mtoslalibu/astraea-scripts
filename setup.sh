@@ -1,3 +1,5 @@
+## execute this script with bash (i.e., /bin/bash setup.sh)
+
 ## install jdk and maven
 sudo apt update
 sudo apt-get --yes install openjdk-8-jdk
