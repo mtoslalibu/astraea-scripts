@@ -5,6 +5,10 @@ reset=`tput sgr0`
 filename_out="/mydata/traces/synexperiment"
 mkdir -p $filename_out
 
+> /local/astraea-spans/sleeps
+echo "check sleeps now"
+cat /local/astraea-spans/sleeps
+
 iter=10
 
 entries=($(shuf -i 2-30 -n $iter))
@@ -21,12 +25,13 @@ echo -e "\n\nIteration $x"
 # echo "Time now before injection $(date +%s)"
 cd /local/DeathStarBench/socialNetwork/wrk2
 
-./wrk -D exp -t 20 -c 20 -d 30 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 100 > /tmp/heyy
+./wrk -D exp -t 5 -c 5 -d 10 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 20 > /tmp/heyy
 
-limit=`tail -n 6 /tmp/heyy | head -1 | awk '{print $7}'`
-limit=${limit::-1}
+#limit=`tail -n 6 /tmp/heyy | head -1 | awk '{print $7}'`
+#limit=${limit::-1}
+limit=200
 
-cat /tmp/heyy |  tail -6  | head -1
+#cat /tmp/heyy |  tail -6  | head -1
 
 echo "limit now $limit"
 
@@ -53,7 +58,7 @@ echo "Time now while injection $(date +%s)"
 
 ## run workload 
 
-./wrk -D exp -t 20 -c 20 -d 60 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 100 > /tmp/heyyinjected &
+./wrk -D exp -t 5 -c 5 -d 60 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 20 > /tmp/heyyinjected &
 workloadPID=$!
 
 
@@ -61,8 +66,9 @@ wait $workloadPID
 echo -e "\nTime now after injection $(date +%s)"
 # date +%s
 
-limit=`tail -n 6 /tmp/heyyinjected | head -1 | awk '{print $7}'`
-limit=${limit::-1}
+#limit=`tail -n 6 /tmp/heyyinjected | head -1 | awk '{print $7}'`
+#limit=${limit::-1}
+limit=1000
 
 cat /tmp/heyyinjected |  tail -6  | head -1
 
@@ -82,11 +88,11 @@ echo "saved traces to  $filename"
 
 
 
- > /local/astraea-spans/sleeps
+> /local/astraea-spans/sleeps
 
 
 
-sleep 30; 
+sleep 15; 
 
 echo "check line number afterwards should be empty"
 cat /local/astraea-spans/sleeps
