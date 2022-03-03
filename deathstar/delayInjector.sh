@@ -20,7 +20,7 @@ echo -e "\n\nIteration $x"
 
 # echo "Time now before injection $(date +%s)"
 
-./wrk -D exp -t 20 -c 20 -d 30 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 100 > /tmp/heyy
+./../../DeathStarBench/socialNetwork/wrk2/wrk -D exp -t 20 -c 20 -d 30 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 100 > /tmp/heyy
 
 limit=`tail -n 6 /tmp/heyy | head -1 | awk '{print $7}'`
 limit=${limit::-1}
@@ -51,7 +51,7 @@ echo "Time now while injection $(date +%s)"
 # date +%s
 
 ## run workload 
-./wrk -D exp -t 20 -c 20 -d 60 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 100 > /tmp/heyyinjected &
+./../../DeathStarBench/socialNetwork/wrk2/wrk -D exp -t 20 -c 20 -d 60 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 100 > /tmp/heyyinjected &
 workloadPID=$!
 
 
