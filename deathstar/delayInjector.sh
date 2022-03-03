@@ -19,7 +19,7 @@ echo "----------------------------"
 echo -e "\n\nIteration $x"
 
 # echo "Time now before injection $(date +%s)"
-cd ../../DeathStarBench/socialNetwork/wrk2
+cd /local/DeathStarBench/socialNetwork/wrk2
 
 ./wrk -D exp -t 20 -c 20 -d 30 -L -s ./scripts/social-network/compose-post.lua http://localhost:8080/wrk2-api/post/compose -R 100 > /tmp/heyy
 
@@ -61,10 +61,10 @@ wait $workloadPID
 echo -e "\nTime now after injection $(date +%s)"
 # date +%s
 
-limit=`tail -n 6 /tmp/heyy | head -1 | awk '{print $7}'`
+limit=`tail -n 6 /tmp/heyyinjected | head -1 | awk '{print $7}'`
 limit=${limit::-1}
 
-cat /tmp/heyy |  tail -6  | head -1
+cat /tmp/heyyinjected |  tail -6  | head -1
 
 
 endtime=`date +%s`
