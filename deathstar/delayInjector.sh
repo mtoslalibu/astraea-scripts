@@ -82,7 +82,7 @@ echo "url now after injection $url"
 sleep 5;
 echo "curling now to $svc_line with url $url"
 
-filename="$filename_out/$filename-injected"
+filename="$filename-injected"
 
 echo "saved traces to  $filename"
 
