@@ -39,7 +39,7 @@ url="http://localhost:16686/api/traces?end=$endtime&limit=$limit&maxDuration&min
 echo "url now $url"
 
 
-filename=`shuf -n 2 /local/astraea-scripts/deathstar/all-spans | tee /local/astraea-spans/sleeps | xargs -n2 -d'\n'`
+filename=`shuf -n 2 /local/astraea-scripts/deathstar/all-spans | tee /local/astraea-spans/sleeps | xargs -n2 -d'\n' | sed -e 's/ /___/g'`
 
 sleep 5
 
