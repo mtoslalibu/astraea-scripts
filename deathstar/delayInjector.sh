@@ -83,14 +83,10 @@ sleep 5;
 echo "curling now to $svc_line with url $url"
 
 filename="$filename-injected"
-
+curl -sS "$url" > $filename
 echo "saved traces to  $filename"
 
-
-
 > /local/astraea-spans/sleeps
-
-
 
 sleep 15; 
 
