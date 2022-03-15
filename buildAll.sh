@@ -14,4 +14,4 @@ cd /local/train-ticket
 sudo mvn clean package -Dmaven.test.skip=true
 sudo docker-compose build
 
-sudo docker-compose up
+sudo docker-compose up -d
