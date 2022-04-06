@@ -22,6 +22,7 @@ echo -e "\n\nIteration $x"
 sleep 3
 
 filename=`shuf -n 1 /local/astraea-scripts/media/all-spans | tee /local/astraea-spans/sleeps | xargs -n2 -d'\n' | sed -e 's/ /___/g'`
+echo "Running for $filename"
 filename="$filename_out/$filename"
 
 echo "Time now while injection $(date +%s)"
