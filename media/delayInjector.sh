@@ -7,10 +7,8 @@ cat /local/astraea-spans/sleeps
 
 iter=8
 duration=150
-qps=50
+qps=20
 
-entries=($(shuf -i 2-30 -n $iter))
-echo "${entries[@]}"
 
 x=0
 while [ $x -lt $iter ]
@@ -28,7 +26,7 @@ filename="$filename_out/$filename"
 echo "Time now while injection $(date +%s)"
 
 ## run workload
-cd /local/DeathStarBench/socialNetwork/wrk2
+cd /local/DeathStarBench/mediaMicroservices/wrk2
 
 ./wrk -D exp -t 5 -c 5 -d $duration -L -s ./scripts/media-microservices/compose-review.lua http://localhost:8080/wrk2-api/review/compose -R 10 $qps > /tmp/heyyinjected &
 workloadPID=$!
