@@ -28,7 +28,7 @@ echo "Time now while injection $(date +%s)"
 ## run workload
 cd /local/DeathStarBench/mediaMicroservices/wrk2
 
-./wrk -D exp -t 5 -c 5 -d $duration -L -s ./scripts/media-microservices/compose-review.lua http://localhost:8080/wrk2-api/review/compose -R 10 $qps > /tmp/heyyinjected &
+./wrk -D exp -t 5 -c 5 -d $duration -L -s ./scripts/media-microservices/compose-review.lua http://localhost:8080/wrk2-api/review/compose -R $qps > /tmp/heyyinjected &
 workloadPID=$!
 
 wait $workloadPID
