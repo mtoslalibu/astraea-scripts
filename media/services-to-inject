@@ -1,0 +1,10 @@
+mediamicroservices_movie-review-service_1
+mediamicroservices_review-storage-service_1
+mediamicroservices_review-storage-mongodb_1
+mediamicroservices_rating-service_1
+mediamicroservices_text-service_1
+mediamicroservices_user-service_1
+mediamicroservices_rating-redis_1
+mediamicroservices_review-storage-memcached_1
+mediamicroservices_movie-id-memcached_1
+mediamicroservices_movie-info-memcached_1
