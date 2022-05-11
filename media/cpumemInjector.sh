@@ -9,6 +9,8 @@ iter=8
 duration=150
 qps=20
 
+wget https://github.com/alexei-led/pumba/releases/download/0.9.0/pumba_linux_amd64
+chmod +x pumba_linux_amd64
 
 x=0
 while [ $x -lt $iter ]
@@ -37,7 +39,6 @@ cd /local/astraea-scripts/media
 svc=`sed "${x}q;d" services-to-inject`
 echo -e "Service now: $svc"
 
-cd /local
 
 injector=1
 injector_lim=$(( $duration / 30))
@@ -46,7 +47,7 @@ while [ $injector -le $injector_lim ]
 do
 
 echo -e "Injecting nth: $injector"
-sudo ./pumba_linux_amd64 stress --duration 30s --stressors="--matrix 1 -t 30s" $svc
+./pumba_linux_amd64 stress --duration 30s --stressors="--matrix 1 -t 30s" $svc
 injector=$(( $injector + 1 ))
 done
 
