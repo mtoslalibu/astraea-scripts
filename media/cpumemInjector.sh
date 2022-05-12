@@ -6,8 +6,8 @@ echo "check sleeps now"
 cat /local/astraea-spans/sleeps
 
 iter=8
-duration=150
-qps=20
+duration=250
+qps=10
 
 wget https://github.com/alexei-led/pumba/releases/download/0.9.0/pumba_linux_amd64
 chmod +x pumba_linux_amd64
@@ -47,7 +47,7 @@ while [ $injector -le $injector_lim ]
 do
 
 echo -e "Injecting nth: $injector"
-./pumba_linux_amd64 stress --duration 30s --stressors="--matrix 1 -t 30s" $svc
+./pumba_linux_amd64 stress --duration 30s --stressors="--bigheap 2" $svc
 injector=$(( $injector + 1 ))
 done
 
