@@ -6,7 +6,7 @@ echo "check sleeps now"
 cat /local/astraea-spans/sleeps
 
 iter=8
-duration=250
+duration=300
 qps=10
 
 wget https://github.com/alexei-led/pumba/releases/download/0.9.0/pumba_linux_amd64
