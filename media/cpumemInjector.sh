@@ -21,15 +21,10 @@ echo "----------------------------"
 echo -e "\n\nIteration $x"
 sleep 3
 
-filename=`shuf -n 1 /local/astraea-scripts/media/all-spans | tee /local/astraea-spans/sleeps | xargs -n2 -d'\n' | sed -e 's/ /___/g'`
-echo "Running for $filename"
-filename="$filename_out/$filename"
-
 echo "Time now while injection $(date +%s)"
 
 ## run workload
 cd /local/DeathStarBench/mediaMicroservices/wrk2
-
 ./wrk -D exp -t 5 -c 5 -d $duration -L -s ./scripts/media-microservices/compose-review.lua http://localhost:8080/wrk2-api/review/compose -R $qps > /tmp/heyyinjected &
 workloadPID=$!
 
@@ -70,7 +65,10 @@ echo "limit after injection now $limit , endtime after injection now $endtime"
 url="http://localhost:16686/api/traces?end=$endtime&limit=$limit&maxDuration&minDuration&prettyPrint=true&raw=true&service=compose-review-service"
 echo "curling now to $svc_line with url $url"
 
-filename="$filename-injected"
+filename="$svc-$endtime"
+filename=${filename//\//___}
+filename="$filename_out/$filename"
+echo "filename now : $filename"
 curl -sS "$url" > $filename
 echo "saved traces to  $filename"
 
