@@ -1,13 +1,13 @@
 cd /local/java-web-servlet-filter
-git pull
+sudo git pull
 sudo ./mvnw clean install -Dlicense.skip=true -Dcheckstyle.skip -DskipTests=true
 
 cd /local/java-spring-web
-git pull
+sudo git pull
 sudo ./mvnw clean install -Dlicense.skip=true -Dcheckstyle.skip -DskipTests=true
 
 cd /local/java-spring-jaeger
-git pull
+sudo git pull
 sudo ./mvnw clean install -Dlicense.skip=true -Dcheckstyle.skip -DskipTests=true
 
 cd /local/train-ticket
