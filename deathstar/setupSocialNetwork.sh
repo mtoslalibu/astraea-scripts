@@ -13,6 +13,7 @@ sudo docker build -t mert/social-network-microservices:latest .
 sudo docker-compose up -d
 
 ## populate data
+# pip3 install aiohttp
 #sudo python3 scripts/init_social_graph.py --graph=socfb-Reed98
 
 ## build workload
